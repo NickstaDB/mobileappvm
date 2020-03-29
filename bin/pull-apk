@@ -1,0 +1,65 @@
+#!/usr/bin/python3
+import readline
+import subprocess
+import sys
+
+#Check args
+if len(sys.argv) != 2:
+	print("pull-apk - Pull an APK from a device by the full or partial app name.")
+	print("")
+	print("Usage: pull-apk <name>")
+	sys.exit()
+apkname = sys.argv[1]
+
+#Get a list of installed packages that match the given name
+packages = []
+proc = subprocess.run(["adb", "shell", "pm", "list", "packages"], stdout=subprocess.PIPE)
+out = proc.stdout.decode("utf-8")
+for line in out.split("\n"):
+	if line.startswith("package:"):
+		pkgname = line[8:]
+		if apkname.lower() in pkgname.lower():
+			packages.append(pkgname)
+
+#Bail if no packages found
+if len(packages) == 0:
+	print("No packages found matching the search term '" + apkname + "'.")
+	print("Run 'adb shell pm list packages' to check installed package names.")
+	sys.exit()
+
+#Narrow down to one option if there was more than one match
+if len(packages) > 1:
+	print("Multiple matching packages found, select the package to pull.")
+	choice = -1
+	while choice == -1:
+		for i in range(len(packages)):
+			print("[" + str(i + 1) + "] " + packages[i])
+		choice = input("Choice: ")
+		if choice.isnumeric() == False or int(choice) < 1 or int(choice) > len(packages):
+			print("Invalid choice.\n")
+			choice = -1
+	apkname = packages[int(choice) - 1]
+else:
+	apkname = packages[0]
+
+#Get the APK file paths
+print("Pulling APK(s) for package: " + apkname)
+proc = subprocess.run(["adb", "shell", "pm", "path", apkname], stdout=subprocess.PIPE)
+out = proc.stdout.decode("utf-8")
+paths = []
+for line in out.split("\n"):
+	if line.startswith("package:"):
+		paths.append(line[8:])
+if len(paths) == 0:
+	print("Error, no APK paths found.")
+	print("Run 'adb shell pm path " + apkpath + "' to check package path.")
+	sys.exit()
+
+#Pull the APK files
+print("Found " + str(len(paths)) + " APK(s).")
+for path in paths:
+	basename = path.split("/")[-1]
+	print("[+] Pulling " + apkname + "-" + basename)
+	subprocess.run(["adb", "pull", path, apkname + "-" + basename], stdout=subprocess.DEVNULL)
+print("Done.")
+print("")

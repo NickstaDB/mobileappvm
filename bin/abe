@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar ~/tools/android-backup-extractor/build/libs/abe-all.jar $@

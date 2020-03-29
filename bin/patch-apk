@@ -1,0 +1,2 @@
+#!/bin/bash
+python3 ~/tools/patch-apk/patch-apk.py $@

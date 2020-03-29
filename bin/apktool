@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar ~/tools/apktool/brut.apktool/apktool-cli/build/libs/apktool-cli-all.jar $@

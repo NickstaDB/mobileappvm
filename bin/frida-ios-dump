@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ~/tools/frida-ios-dump
+python3 dump.py $@

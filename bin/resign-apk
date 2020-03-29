@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+import os
+import subprocess
+import sys
+
+#Check args
+if len(sys.argv) != 2:
+	print("resign-apk - Resign and zipalign a modified APK.")
+	print("")
+	print("Usage: resign-apk <apk-file>")
+	sys.exit()
+apkfile = sys.argv[1]
+
+#Sign the APK
+print("Signing APK.")
+subprocess.run(["jarsigner", "-sigalg", "SHA1withRSA", "-digestalg", "SHA1", "-keystore",
+	os.path.realpath(os.path.join(os.path.realpath(__file__), "..", "..", "data", "mobileappvm.keystore")),
+	"-storepass", "mobileappvm", apkfile, "mobileappvmkey"], stdout=subprocess.DEVNULL)
+
+#Zipalign the APK
+print("Zip-aligning APK.")
+subprocess.run(["zipalign", "-fv", "4", apkfile, apkfile.replace(".apk", ".aligned.apk")], stdout=subprocess.DEVNULL)
+print("Done, aligned APK at " + apkfile.replace(".apk", ".aligned.apk"))
+

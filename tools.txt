@@ -1,0 +1,33 @@
+abe / Android Backup Extractor
+-> Converts backups from "adb backup" format to tar and back.
+
+apktool
+-> Extracts/decompiles and rebuilds APK files.
+
+drozer
+-> Android app analysis and attack tool.
+
+frida
+-> Instrumentation toolkit.
+
+frida-ios-dump
+-> Frida-based tool to generate an IPA containing an unencrypted binary from a running iOS app.
+
+ghidra
+-> Spyware.
+
+MobSF / Mobile Security Framework
+-> Web-based mobile app static analysis tool.
+
+objection
+-> Instrumentation/frida-based mobile app analysis tool including features like sslpinning bypass, keychain dumping, method hooking etc.
+
+patch-apk
+-> Android patching script with support for split APKs/app bundles.
+
+pull-apk
+-> Pull an installed APK from a device using adb, supports partial matching of package names.
+
+resign-apk
+-> Resigns and zip-aligns a modified APK file.
+
