@@ -28,10 +28,11 @@ git clone https://github.com/NickstaDB/patch-apk
 cd ~/tools/android-backup-extractor
 gradle
 
-#Build apktool
+#Build apktool, removing "-SNAPSHOT" from the version number as this breaks objection's version detection
 cd ~/tools/apktool
+sed -i "s/def apktoolversion_minor = 'SNAPSHOT';/def apktoolversion_minor = '';/g" build.gradle
 ./gradlew
-./gradlew build shadowJar
+./gradlew build release shadowJar
 
 #Mobile security framework docker image
 sudo chmod 666 /var/run/docker.sock
