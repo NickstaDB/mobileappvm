@@ -8,8 +8,11 @@ sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 
+#Install Java
+sudo apt-get -y install openjdk-11-jdk
+
 #Install stuff
-sudo apt-get -y install open-vm-tools-desktop git terminator adb python3-pip python python-pip openjdk-11-jdk zipalign docker.io aapt apksigner
+sudo apt-get -y install open-vm-tools-desktop git terminator adb python3-pip python python-pip zipalign docker.io aapt apksigner
 sudo snap install --classic code
 
 #Python stuff
