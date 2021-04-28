@@ -17,7 +17,7 @@ sudo snap install --classic code
 
 #Python stuff
 pip install androguard drozer twisted
-pip3 install asn1crypto bcrypt cffi click colorama cryptography delegator.py enum34 flask frida frida-tools idna ipaddress litecli objection paramiko prompt-toolkit pyasn1 pycparser Pygments PyNaCl requests scp six tabulate tasks tqdm wcwidth
+pip3 install asn1crypto bcrypt cffi click colorama cryptography delegator.py enum34 flask frida==14.2.9 frida-tools idna ipaddress litecli objection paramiko prompt-toolkit pyasn1 pycparser Pygments PyNaCl requests scp six tabulate tasks tqdm wcwidth
 
 #Grab tools from Github
 mkdir ~/tools
